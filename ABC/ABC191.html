@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+        <link rel="stylesheet" href="../css/prettify.css">
+<script src="../js/myjs.js"></script>
+<script src="../js/prettify.js"></script>
+<script src="../js/lang-basic.js"></script>
+<script src="../js/run_prettify.js"></script>
+<script src="../js/jquery-3.5.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script>
+  $(function(){
+    $("#NavbarComponent").load("http://tt-lifeweb.cfbx.jp/component/navbar_component.html");
+  });
+</script>
+
+    </head>
+<body>
+
+  <nav id = "NavbarComponent"></nav>
+
+  <div class = "container">
+    <main role="main">
+    <div class="jumbotron"> 
+    <div class="container">
+        <h2>問題E</h2>
+        <p>ダイクストラ法を使って最短経路を求める問題.</p>
+        <pre class="prettyprint"><code id = "B" class="language-c">
+  #include&lt;bits/stdc++.h&gt;
+  #define rep(i,n) for(ll i=0; i &lt; (n) ; i++)
+  static const int WH = 0;
+  static const int GR = 1;
+  static const int BL = 2;
+  static const long long INF = 2000000000; 
+  using namespace std;
+  using ll = long long;
+  
+  struct Edge{
+      int to; int cost;
+  };
+  
+  struct cand{
+      int vertex; ll dis;
+  };
+  
+  int main(){
+      int n; int m; cin &gt;&gt; n &gt;&gt; m;
+      int color[n+1];
+      ll distance[n+1];
+      vector&lt;vector&lt;Edge&gt;&gt; vec(n+1);
+      rep(i,m){
+          int a, b, c; cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;
+          Edge in; in.to = b; in.cost = c;
+          vec[a].push_back(in);
+      }
+  
+      auto comp = [&amp;](cand cand1, cand cand2) -&gt; bool{
+          return cand1.dis &gt; cand2.dis;
+      };
+  
+      priority_queue&lt;cand,vector&lt;cand&gt;,decltype(comp)&gt; Q(comp);
+  
+      for(int i = 1; i &lt;= n; i++){
+          for(int j = 1; j&lt;= n; j++){
+              color[j] = WH;
+              distance[j] = INF;
+          }
+          for(Edge x: vec[i]){
+              cand initial; initial.vertex = x.to; initial.dis = x.cost;
+              Q.push(initial);
+          }
+          while(Q.size()&gt;0){
+              cand now =  Q.top(); Q.pop();
+              color[now.vertex] = BL;
+              if(now.dis &lt; distance[now.vertex]){
+                  distance[now.vertex] = now.dis;
+              } else {
+                  continue;
+              }
+              for(Edge x: vec[now.vertex]){
+                  if(color[x.to] == WH){
+                      cand next;
+                      next.vertex = x.to;
+                      next.dis = now.dis + x.cost;
+                      Q.push(next);
+                  }
+              }
+          }
+          if(distance[i] == INF){
+              cout &lt;&lt; -1 &lt;&lt; endl;    
+          } else {
+              cout &lt;&lt; distance[i] &lt;&lt; endl;
+          }
+      }
+       
+  
+      return 0;
+  }</code></pre>
+  
+    </div>
+  
+  </div>
+  </main>
+  </div>
+
+</body>
+</html>
+

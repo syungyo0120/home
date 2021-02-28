@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/prettify.css">
+    <script src="../js/myjs.js"></script>
+    <script src="../js/prettify.js"></script>
+    <script src="../js/lang-basic.js"></script>
+    <script src="../js/run_prettify.js"></script>
+    <script src="../js/jquery-3.5.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+    <script>
+        $(function () {
+            $("#NavbarComponent").load("http://tt-lifeweb.cfbx.jp/component/navbar_component.html");
+        });
+    </script>
+</head>
+
+<body>
+    <nav id="NavbarComponent"></nav>
+
+    <section>
+        <h1>ABC192</h1>
+
+        <section>
+            <h2>問題B</h2>
+            <div class="col-sm-12">
+                <pre class="prettyprint"><code id = "B" class="language-c">
+#include &lt;bits/stdc++.h&gt;
+#define rep(i,n) for(ll i=0; i &lt; (n) ; i++)
+static const int WH = 0;
+static const int GR = 1;
+static const int BL = 2;
+using namespace std;
+using ll = long long;
+                
+int main(){
+    string s; cin >> s;
+    int n = s.size()/2;
+    int m = (s.size() + 1)/2;
+                
+    for(int i = 1; i <= n; i++){
+        if(isupper(s[2 * i -1]) == 0){
+                cout << "No" << endl;
+                return 0;
+            }
+    }
+    for(int i = 0; i < m; i++){
+        if(isupper(s[2 * i]) != 0){
+            cout << "No" << endl;
+            return 0;
+        }
+    }
+    cout << "Yes" << endl;
+    return 0;
+}</code></pre>
+            </div>
+        </section>
+
+
+</body>
+
+</html>
